@@ -1,7 +1,8 @@
 import random
 
 while True:
-    pc_actions, pcAct = ["kámen", "nůžky", "papír"], random.choice(pc_actions)
+    pc_actions = ["kámen", "nůžky", "papír"]
+    pcAct = random.choice(pc_actions)
     userAct = input("Zadej možnost (kámen, nůžky, papír):\n").lower()
     print(f"Hraješ {userAct} a počítač hraje {pcAct}.")
 
