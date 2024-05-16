@@ -1,5 +1,4 @@
 import tkinter as tk
-import parse
 
 # konstanty
 backgroud_color = "#283747"
@@ -19,55 +18,28 @@ priklad = tk.StringVar()
 
 def getValue(x):
     global vstupniPriklad
+
     vstupniPriklad = vstupniPriklad + str(x)
     priklad.set(vstupniPriklad)
 
 def getClear():
     global vstupniPriklad
+
     vstupniPriklad = ""
     priklad.set(vstupniPriklad)
 
 def getClearEntry():
     global vstupniPriklad
+
     vstupniPriklad = vstupniPriklad[:-1]
     priklad.set(vstupniPriklad)
 	
-def soucet(vstup):
-	arg1, arg2 = vstup.split("+")
-	return(int(arg1) + int(arg2))
-
-def podil(vstup):
-	arg1, arg2 = vstup.split("/")
-	return(int(arg1) / int(arg2))
-
-def soucin(vstup):
-	arg1, arg2 = vstup.split("*")
-	return(int(arg1) * int(arg2))
-
-def rozdil(vstup):
-	arg1, arg2 = vstup.split("-")
-	return(int(arg1) - int(arg2))
-
-def umocneni(vstup):
-	arg1, arg2 = vstup.split("**")
-	return(int(arg1) ** int(arg2))
-
 def getSolve():
     global vstupniPriklad
-    match parse.search('{:D}', vstupniPriklad)[0]:
-        case "+":
-            priklad.set(soucet(vstupniPriklad))
-        case "-":
-            priklad.set(rozdil(vstupniPriklad))
-        case "/":
-            priklad.set(podil(vstupniPriklad))
-        case "*":
-            priklad.set(soucin(vstupniPriklad))
-        case "**":
-            priklad.set(umocneni(vstupniPriklad))
-        case _:
-            priklad.set("wrong input")
 
+    vstupniPriklad = str(eval(vstupniPriklad))
+    priklad.set(vstupniPriklad)
+    
 
 # TKINTER OKNO
 
@@ -121,9 +93,6 @@ bMinus.grid(row=5, column=3)
 
 bPlus = tk.Button(w, text="+", height=2, width=6, background="#3D4B59", borderwidth=0, foreground="#ebedee", command= lambda: getValue("+"))
 bPlus.grid(row=6, column=3)
-
-bCara = tk.Button(w, text=",", height=2, width=6, background="#3D4B59", borderwidth=0, foreground="#ebedee", command= lambda: getValue(","))
-bCara.grid(row=5, column=2)
 
 bVycistit = tk.Button(w, text="C", height=2, width=6, background="#3D4B59", borderwidth=0, foreground="#ebedee", command= lambda: getClear())
 bVycistit.grid(row=6, column=0)
